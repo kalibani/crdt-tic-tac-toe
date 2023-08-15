@@ -52,7 +52,7 @@ function Game() {
     }
     squares[i] = ticTacToeStates.xIsNext ? "X" : "O";
     setTicTacToeStates(
-      (ticTacToeStates) => ({
+      {
         history: history.concat([
           {
             squares: squares,
@@ -60,7 +60,7 @@ function Game() {
         ]),
         stepNumber: history.length,
         xIsNext: !ticTacToeStates.xIsNext,
-      }),
+      },
       handleStateChange()
     );
   };
