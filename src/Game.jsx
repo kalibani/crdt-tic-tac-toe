@@ -37,14 +37,14 @@ function Game() {
 
   useEffect(() => {
     handleStateChange();
-  }, [ticTacToeStates.history]);
+  }, [ticTacToeStates.xIsNext]);
 
   const handleStateChange = () => {
     const ymap = ydoc.getMap("state");
     ymap.set("state", { ...ticTacToeStates });
   };
 
-  const handleClick = async (i) => {
+  const handleClick = (i) => {
     const history = ticTacToeStates.history.slice(
       0,
       ticTacToeStates.stepNumber + 1
