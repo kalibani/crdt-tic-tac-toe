@@ -14,6 +14,7 @@ Currently, two official plugins are available:
 - hit npm i && npm run dev
 
  ## Try the live version here : https://crdt-tic-tac-toe-one.vercel.app/
-open 2 window of chrome, start play and spot the live changes
-
-## this simple game are using Yjs as the CRDT model as shared data types that can be manipulated concurrently.
+- open 2 window of chrome
+- start play and spot the live changes
+  
+this simple game are using Yjs as the CRDT model as shared data types that can be manipulated concurrently.
