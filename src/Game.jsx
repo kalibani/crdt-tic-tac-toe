@@ -35,6 +35,10 @@ function Game() {
     };
   }, []);
 
+  useEffect(() => {
+    handleStateChange();
+  }, [ticTacToeStates.history]);
+
   const handleStateChange = () => {
     const ymap = ydoc.getMap("state");
     ymap.set("state", { ...ticTacToeStates });
@@ -51,18 +55,15 @@ function Game() {
       return;
     }
     squares[i] = ticTacToeStates.xIsNext ? "X" : "O";
-    setTicTacToeStates(
-      {
-        history: history.concat([
-          {
-            squares: squares,
-          },
-        ]),
-        stepNumber: history.length,
-        xIsNext: !ticTacToeStates.xIsNext,
-      },
-      handleStateChange()
-    );
+    setTicTacToeStates({
+      history: history.concat([
+        {
+          squares: squares,
+        },
+      ]),
+      stepNumber: history.length,
+      xIsNext: !ticTacToeStates.xIsNext,
+    });
   };
 
   const jumpTo = (step) => {
