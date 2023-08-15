@@ -24,7 +24,6 @@ function Game() {
   });
 
   useEffect(() => {
-    provider.on();
     const ymap = ydoc.getMap("state");
     ymap.observe(() => {
       const xstate = { ...ymap.get("state") };
@@ -33,20 +32,13 @@ function Game() {
 
     return () => {
       provider.disconnect();
-      provider.destroy();
     };
   }, []);
 
-  useEffect(() => {
-    () => {
-      const ymap = ydoc.getMap("state");
-      ymap.set("state", ticTacToeStates);
-
-      console.log("ymap", ymap);
-    };
-  }, [ticTacToeStates]);
-
-  useEffect(() => {});
+  const handleStateChange = () => {
+    const ymap = ydoc.getMap("state");
+    ymap.set("state", ticTacToeStates);
+  };
 
   const handleClick = (i) => {
     const history = ticTacToeStates.history.slice(
@@ -59,15 +51,18 @@ function Game() {
       return;
     }
     squares[i] = ticTacToeStates.xIsNext ? "X" : "O";
-    setTicTacToeStates({
-      history: history.concat([
-        {
-          squares: squares,
-        },
-      ]),
-      stepNumber: history.length,
-      xIsNext: !ticTacToeStates.xIsNext,
-    });
+    setTicTacToeStates(
+      (ticTacToeStates) => ({
+        history: history.concat([
+          {
+            squares: squares,
+          },
+        ]),
+        stepNumber: history.length,
+        xIsNext: !ticTacToeStates.xIsNext,
+      }),
+      handleStateChange()
+    );
   };
 
   const jumpTo = (step) => {
