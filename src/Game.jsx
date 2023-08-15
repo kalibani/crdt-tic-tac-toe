@@ -35,12 +35,12 @@ function Game() {
     };
   }, []);
 
-  // const handleStateChange = () => {
-  //   const ymap = ydoc.getMap("state");
-  //   ymap.set("state", ticTacToeStates);
-  // };
+  const handleStateChange = () => {
+    const ymap = ydoc.getMap("state");
+    ymap.set("state", { ...ticTacToeStates });
+  };
 
-  const handleClick = (i) => {
+  const handleClick = async (i) => {
     const history = ticTacToeStates.history.slice(
       0,
       ticTacToeStates.stepNumber + 1
@@ -60,8 +60,8 @@ function Game() {
         ]),
         stepNumber: history.length,
         xIsNext: !ticTacToeStates.xIsNext,
-      }
-      // handleStateChange()
+      },
+      handleStateChange()
     );
   };
 
